@@ -18,7 +18,7 @@ type Props = {
 };
 
 export default function Web({ data }: Props) {
-  if (data.data.length === 0)
+  if (data?.data?.length === 0)
     return (
       <Container>
         <Title order={2}> No podcasts uploaded right now </Title>
@@ -27,7 +27,7 @@ export default function Web({ data }: Props) {
   return (
     <Container>
       <SimpleGrid cols={2}>
-        {data.data.map((podcast) => (
+        {data?.data?.map((podcast) => (
           <ArticleCard
             key={podcast.id}
             description={podcast.attributes.description}
