@@ -1,0 +1,35 @@
+{
+  "name": "@stiforr/backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "dev": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "@strapi/plugin-i18n": "4.3.2",
+    "@strapi/plugin-users-permissions": "4.3.2",
+    "@strapi/provider-upload-cloudinary": "^4.3.2",
+    "@strapi/strapi": "4.3.2",
+    "pg": "8.6.0",
+    "react-select": "^5.4.0"
+  },
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "a110b6b7-d5c4-4fd9-b66f-7be1b23e373f"
+  },
+  "engines": {
+    "node": ">=12.x.x <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT",
+  "volta": {
+    "node": "16.16.0"
+  }
+}
