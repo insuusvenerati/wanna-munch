@@ -1,4 +1,4 @@
-import { Container, SimpleGrid } from "@mantine/core";
+import { Container, SimpleGrid, Title } from "@mantine/core";
 import { GetStaticProps } from "next";
 import { ArticleCard } from "../components/ArticleCard";
 import { Podcast } from "../types/podcast";
@@ -18,6 +18,12 @@ type Props = {
 };
 
 export default function Web({ data }: Props) {
+  if (data.data.length === 0)
+    return (
+      <Container>
+        <Title order={2}> No podcasts uploaded right now </Title>
+      </Container>
+    );
   return (
     <Container>
       <SimpleGrid cols={2}>
