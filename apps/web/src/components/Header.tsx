@@ -141,17 +141,18 @@ export function HeaderMiddle({ links, social }: HeaderMiddleProps) {
         </Group>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
-          {social.map((s) => {
-            return (
-              <ActionIcon size="lg" key={s.url}>
-                {React.createElement(SocialIcons[s.icon], {
-                  size: 25,
-                  color: "white",
-                  stroke: 1.5,
-                })}
-              </ActionIcon>
-            );
-          })}
+          {social &&
+            social.map((s) => {
+              return (
+                <ActionIcon size="lg" key={s.url}>
+                  {React.createElement(SocialIcons[s.icon], {
+                    size: 25,
+                    color: "white",
+                    stroke: 1.5,
+                  })}
+                </ActionIcon>
+              );
+            })}
         </Group>
 
         {/* <Group spacing={0} className={classes.social} position="right" noWrap>
