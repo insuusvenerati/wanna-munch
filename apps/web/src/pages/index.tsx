@@ -20,6 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { podcastsData, metaData },
+    revalidate: 60 * 60,
   };
 };
 
