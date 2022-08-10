@@ -24,4 +24,10 @@ module.exports = ({ env }) => ({
       roles: ["strapi-super-admin"],
     },
   },
+  meilisearch: {
+    config: {
+      host: process.env.MEILISEARCH_HOST,
+      apiKey: process.env.MEILI_MASTER_KEY,
+    },
+  },
 });
