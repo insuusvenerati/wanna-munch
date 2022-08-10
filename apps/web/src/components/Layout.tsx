@@ -1,7 +1,7 @@
 import { Alert, Center, Text } from "@mantine/core";
 import { IconAlertCircle } from "@tabler/icons";
 import { NextSeo } from "next-seo";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Meta } from "../types/metadata";
 import { FooterSocial } from "./Footer";
 import { HeaderMiddle } from "./Header";
@@ -10,9 +10,11 @@ import { Masthead } from "./Masthead";
 type Props = {
   meta: Meta;
   children: JSX.Element | JSX.Element[];
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
 };
 
-export const Layout = ({ meta, children }: Props) => {
+export const Layout = ({ meta, search, setSearch, children }: Props) => {
   const { data } = meta;
   const [alertVisible, setAlertVisible] = useState(true);
 
@@ -34,6 +36,8 @@ export const Layout = ({ meta, children }: Props) => {
       </Alert>
       <Masthead image={data.attributes.logo.data?.attributes.url} />
       <HeaderMiddle
+        search={search}
+        setSearch={setSearch}
         social={data.attributes.social}
         links={data.attributes.links}
       />

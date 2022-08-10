@@ -5,14 +5,16 @@ import {
   createStyles,
   Group,
   Header,
+  TextInput,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconBrandInstagram,
   IconBrandTwitter,
   IconBrandYoutube,
+  IconSearch,
 } from "@tabler/icons";
-import React, { useMemo, useState } from "react";
+import React, { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { Social } from "../types/metadata";
 
 const useStyles = createStyles((theme) => ({
@@ -42,7 +44,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   social: {
-    width: 260,
+    width: 320,
 
     [theme.fn.smallerThan("sm")]: {
       width: "auto",
@@ -94,6 +96,8 @@ const useStyles = createStyles((theme) => ({
 interface HeaderMiddleProps {
   links: { link: string; label: string }[];
   social: Social[];
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
 }
 
 const SocialIcons = {
@@ -102,7 +106,12 @@ const SocialIcons = {
   Youtube: IconBrandYoutube,
 };
 
-export function HeaderMiddle({ links, social }: HeaderMiddleProps) {
+export function HeaderMiddle({
+  links,
+  social,
+  search,
+  setSearch,
+}: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
@@ -141,6 +150,14 @@ export function HeaderMiddle({ links, social }: HeaderMiddleProps) {
         </Group>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
+          <TextInput
+            icon={<IconSearch />}
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            mr="sm"
+            placeholder="Search"
+            aria-label="Search"
+          />
           {social &&
             social.map((s) => {
               return (
@@ -154,18 +171,6 @@ export function HeaderMiddle({ links, social }: HeaderMiddleProps) {
               );
             })}
         </Group>
-
-        {/* <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg">
-            <IconBrandTwitter color="white" size={18} stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <IconBrandYoutube color="white" size={18} stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <IconBrandInstagram color="white" size={18} stroke={1.5} />
-          </ActionIcon>
-        </Group> */}
       </Container>
     </Header>
   );

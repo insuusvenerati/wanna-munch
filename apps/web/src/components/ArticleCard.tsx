@@ -53,7 +53,10 @@ interface ArticleCardProps {
   title: string;
   description: string;
   user: string;
-  audio: Audio;
+  audio: {
+    url: string;
+    mime: string;
+  };
 }
 
 export function ArticleCard({
@@ -96,10 +99,7 @@ export function ArticleCard({
       </Text>
 
       <audio controls>
-        <source
-          src={audio.data.attributes.url}
-          type={audio.data.attributes.mime}
-        />
+        <source src={audio.url} type={audio.mime} />
       </audio>
 
       <Group position="apart" className={classes.footer}>
