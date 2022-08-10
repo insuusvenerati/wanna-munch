@@ -66,7 +66,7 @@ export function ArticleCard({
   ...others
 }: ArticleCardProps &
   Omit<React.ComponentPropsWithoutRef<"div">, keyof ArticleCardProps>) {
-  const { classes, cx, theme } = useStyles();
+  const { classes, cx } = useStyles();
 
   return (
     <Card
@@ -76,7 +76,7 @@ export function ArticleCard({
       {...others}
     >
       <Card.Section>
-        <Image src={image} height={180} />
+        <Image alt={title} src={image} height={180} />
       </Card.Section>
 
       <Badge

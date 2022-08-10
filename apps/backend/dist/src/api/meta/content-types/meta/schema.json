@@ -1,0 +1,44 @@
+{
+    "kind": "singleType",
+    "collectionName": "metas",
+    "info": {
+        "singularName": "meta",
+        "pluralName": "metas",
+        "displayName": "meta",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "siteTitle": {
+            "type": "string",
+            "required": true,
+            "default": "Wanna Munch"
+        },
+        "logo": {
+            "type": "media",
+            "multiple": false,
+            "required": true,
+            "allowedTypes": [
+                "images"
+            ]
+        },
+        "favicon": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": [
+                "images"
+            ]
+        },
+        "links": {
+            "type": "json",
+            "required": true
+        },
+        "social": {
+            "type": "json"
+        }
+    }
+}

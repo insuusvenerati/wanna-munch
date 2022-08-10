@@ -1,21 +1,27 @@
-import { useState } from "react";
 import {
-  createStyles,
-  Header,
-  Group,
   ActionIcon,
-  Container,
   Burger,
+  Container,
+  createStyles,
+  Group,
+  Header,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
+  IconBrandInstagram,
   IconBrandTwitter,
   IconBrandYoutube,
-  IconBrandInstagram,
 } from "@tabler/icons";
-import { MantineLogo } from "@mantine/ds";
+import React, { useMemo, useState } from "react";
+import { Social } from "../types/metadata";
 
 const useStyles = createStyles((theme) => ({
+  header: {
+    backgroundColor: theme.fn.variant({
+      variant: "filled",
+      color: theme.primaryColor,
+    }).background,
+  },
   inner: {
     display: "flex",
     justifyContent: "space-between",
@@ -87,31 +93,42 @@ const useStyles = createStyles((theme) => ({
 
 interface HeaderMiddleProps {
   links: { link: string; label: string }[];
+  social: Social[];
 }
 
-export function HeaderMiddle({ links }: HeaderMiddleProps) {
+const SocialIcons = {
+  Twitter: IconBrandTwitter,
+  Instagram: IconBrandInstagram,
+  Youtube: IconBrandYoutube,
+};
+
+export function HeaderMiddle({ links, social }: HeaderMiddleProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
 
-  const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={cx(classes.link, {
-        [classes.linkActive]: active === link.link,
-      })}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-      }}
-    >
-      {link.label}
-    </a>
-  ));
+  const items = useMemo(
+    () =>
+      links.map((link) => (
+        <a
+          key={link.label}
+          href={link.link}
+          className={cx(classes.link, {
+            [classes.linkActive]: active === link.link,
+          })}
+          onClick={(event) => {
+            event.preventDefault();
+            setActive(link.link);
+          }}
+        >
+          {link.label}
+        </a>
+      )),
+    [active, classes.link, classes.linkActive, cx, links]
+  );
 
   return (
-    <Header height={56} mb={120}>
+    <Header className={classes.header} height={56} mb={60}>
       <Container className={classes.inner}>
         <Burger
           opened={opened}
@@ -123,19 +140,31 @@ export function HeaderMiddle({ links }: HeaderMiddleProps) {
           {items}
         </Group>
 
-        <MantineLogo size={28} />
-
         <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg">
-            <IconBrandTwitter size={18} stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <IconBrandYoutube size={18} stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <IconBrandInstagram size={18} stroke={1.5} />
-          </ActionIcon>
+          {social.map((s) => {
+            return (
+              <ActionIcon size="lg" key={s.url}>
+                {React.createElement(SocialIcons[s.icon], {
+                  size: 25,
+                  color: "white",
+                  stroke: 1.5,
+                })}
+              </ActionIcon>
+            );
+          })}
         </Group>
+
+        {/* <Group spacing={0} className={classes.social} position="right" noWrap>
+          <ActionIcon size="lg">
+            <IconBrandTwitter color="white" size={18} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon size="lg">
+            <IconBrandYoutube color="white" size={18} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon size="lg">
+            <IconBrandInstagram color="white" size={18} stroke={1.5} />
+          </ActionIcon>
+        </Group> */}
       </Container>
     </Header>
   );

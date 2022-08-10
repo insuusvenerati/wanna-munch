@@ -1,14 +1,6 @@
+import { MantineProvider } from "@mantine/core";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { MantineProvider } from "@mantine/core";
-import { HeaderMiddle } from "../components/Header";
-
-const links = [
-  {
-    link: "/",
-    label: "Home",
-  },
-];
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
@@ -16,7 +8,6 @@ export default function App(props: AppProps) {
   return (
     <>
       <Head>
-        <title>Wanna Munch</title>
         <meta name="description" content="MBMBAM Podcast audio clips" />
         <meta
           name="viewport"
@@ -32,7 +23,6 @@ export default function App(props: AppProps) {
           colorScheme: "light",
         }}
       >
-        <HeaderMiddle links={links} />
         <Component {...pageProps} />
       </MantineProvider>
     </>
